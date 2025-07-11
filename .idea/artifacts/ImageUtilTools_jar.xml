@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="ImageUtilTools:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/ImageUtilTools_jar</output-path>
-    <root id="archive" name="ImageUtilTools.jar">
-      <element id="module-output" name="ImageUtilTools" />
-    </root>
-  </artifact>
-</component>

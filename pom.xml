@@ -5,13 +5,86 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>br.app.risetech.image.tools</groupId>
-    <artifactId>ImageUtilTools</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>image-tools</artifactId>
+    <version>1.0</version>
+    <packaging>jar</packaging>
+    <name>Image Tools</name>
+    <description>Uma biblioteca de utilitários e funções para relatórios.</description>
+    <url>https://github.com/risetechapps/image-tools</url>
+    <licenses>
+        <license>
+            <name>MIT License</name> <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <app.developer>Rise Tech</app.developer>
+        <app.website>https://www.risetech.com.br</app.website>
+        <app.description>Tools Image System</app.description>
     </properties>
 
+    <build>
+        <finalName>image-tools</finalName>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                        <manifestEntries>
+                            <Implementation-Version>${project.version}</Implementation-Version>
+                            <Build-Developer>${app.developer}</Build-Developer>
+                            <Build-Website>${app.website}</Build-Website>
+                            <Build-Description>${app.description}</Build-Description>
+                            <Build-Time>${build.timestamp}</Build-Time>
+                            <Build-Project-Name>${project.artifactId}</Build-Project-Name>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.5.3</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>br.app.risetech.image.tools.Main</mainClass>
+                                </transformer>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                            </transformers>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
