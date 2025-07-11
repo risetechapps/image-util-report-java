@@ -27,10 +27,17 @@ public class Main {
     }
 
     private static String rounded(String path, int targetWidth, int targetHeight) throws IOException {
-        BufferedImage originalImage = loadImage(path);
 
-        if (originalImage == null) {
+        BufferedImage originalImage = null;
+
+        if (path == null) {
             originalImage = loadDefaultImage();
+        }else{
+            originalImage = loadImage(path);
+
+            if (originalImage == null) {
+                originalImage = loadDefaultImage();
+            }
         }
 
         int newSize = targetWidth + 10;
